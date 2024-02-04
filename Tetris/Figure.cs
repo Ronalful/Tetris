@@ -158,8 +158,7 @@ namespace Tetris
 
             setShape(rotation);
         }     
-    }
-    
+    }    
     class Figure2 : Figure
     {
         public Figure2()
@@ -201,7 +200,6 @@ namespace Tetris
 
         }
     }
-
     class Figure3 : Figure
     {
         public Figure3()

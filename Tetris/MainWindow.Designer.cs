@@ -32,6 +32,7 @@
             this.gameWindow = new System.Windows.Forms.PictureBox();
             this.gametimer = new System.Windows.Forms.Timer(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.startButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,20 +46,30 @@
             // 
             // gametimer
             // 
-            this.gametimer.Enabled = true;
             this.gametimer.Interval = 1000;
             this.gametimer.Tick += new System.EventHandler(this.gametimer_Tick);
             // 
             // timer
             // 
-            this.timer.Enabled = true;
             this.timer.Interval = 10;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // startButton
+            // 
+            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.startButton.Location = new System.Drawing.Point(401, 570);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(96, 42);
+            this.startButton.TabIndex = 1;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click_1);
             // 
             // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(363, 647);
+            this.ClientSize = new System.Drawing.Size(555, 647);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.gameWindow);
             this.MaximizeBox = false;
             this.Name = "MainWindow";
@@ -74,6 +85,7 @@
         private System.Windows.Forms.PictureBox gameWindow;
         private System.Windows.Forms.Timer gametimer;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button startButton;
     }
 }
 

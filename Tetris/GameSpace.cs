@@ -51,6 +51,10 @@ namespace Tetris
 
         public void init ()
         {
+            for (int j = 0; j < 20; j++)
+                for (int i = 0; i < 10; i++)
+                    grid[j, i] = 0;
+
             window.Clear(Color.Gray);
             
             Pen line = new Pen(Color.Black, 1);
@@ -219,8 +223,7 @@ namespace Tetris
         public bool isFreezed()
         {
             return isfreezed;
-        }
-        
+        }        
         public void check()
         {
             bool flag;
@@ -243,7 +246,6 @@ namespace Tetris
                 }
             }
         }
-
         public void delete(int line)
         {
             for (int j = line; j > 0; j--)
@@ -253,6 +255,15 @@ namespace Tetris
                     grid[j, i] = grid[j - 1, i];
                 }
             }
+        }
+        public bool isLocked()
+        {
+            int[,] shape = figure.getShape();
+            for (int i = 0; i < figure.getSizeX(); i++)
+                for (int j = 0; j < figure.getSizeY(); j++)
+                    if (shape[j, i] > 0 && grid[figure.getY() + j, figure.getX() + i] > 0)
+                        return true;
+            return false;                        
         }
     }
 }

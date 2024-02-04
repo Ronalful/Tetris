@@ -12,10 +12,10 @@ namespace Tetris
 {
     public partial class MainWindow : Form
     {
-        bool isbegin = true;
+        bool isbegin = false;
         bool isrepeat = false;
         GameSpace gameSpace;
-        Random rnd, seed;
+        Random rnd;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,9 +28,8 @@ namespace Tetris
             if (isbegin)
             {
                 gameSpace.init();
-                isbegin = false;
-                seed = new Random();
-                rnd = new Random(seed.Next());
+                isbegin = false;               
+                rnd = new Random();
                 gameSpace.setFigure(rnd.Next(1, 8));
                 gameSpace.unfreeze();
             }
@@ -38,9 +37,18 @@ namespace Tetris
             if (isrepeat)
             {
                 isrepeat = false;
-                rnd = new Random(seed.Next());
                 gameSpace.setFigure(rnd.Next(1, 8));
-                gameSpace.unfreeze();
+
+                if (gameSpace.isLocked())
+                {
+                    timer.Stop();
+                    gametimer.Stop();
+                    startButton.Enabled = true;
+                }
+                else
+                {                    
+                    gameSpace.unfreeze();
+                }
             }
             else
             {
@@ -61,7 +69,22 @@ namespace Tetris
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            if (e.KeyCode == Keys.Escape)
+            {
+                timer.Stop();
+                gametimer.Stop();
+                startButton.Enabled = true;
+            }
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                timer.Start();
+                isbegin = true;
+                isrepeat = false;
+                gametimer.Start();
+                startButton.Enabled = false;
+            }
+
             if (e.KeyCode == Keys.Left && !gameSpace.isLeftWall())
             {
                 gameSpace.moveLeft();
@@ -84,6 +107,7 @@ namespace Tetris
                 gameSpace.rotation();
             }
         }
+        
 
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -92,6 +116,15 @@ namespace Tetris
                 gameSpace.buildFigure();
                 gameSpace.buildGrid();
             }
+        }
+
+        private void startButton_Click_1(object sender, EventArgs e)
+        {
+            timer.Start();
+            isbegin = true;
+            isrepeat = false;
+            gametimer.Start();
+            startButton.Enabled = false;
         }
     }
 }
