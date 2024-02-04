@@ -15,7 +15,7 @@ namespace Tetris
         bool isbegin = true;
         bool isrepeat = false;
         GameSpace gameSpace;
-        Random rnd;
+        Random rnd, seed;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,8 +28,9 @@ namespace Tetris
             if (isbegin)
             {
                 gameSpace.init();
-                isbegin = false;  
-                rnd = new Random();
+                isbegin = false;
+                seed = new Random();
+                rnd = new Random(seed.Next());
                 gameSpace.setFigure(rnd.Next(1, 8));
                 gameSpace.unfreeze();
             }
@@ -37,6 +38,7 @@ namespace Tetris
             if (isrepeat)
             {
                 isrepeat = false;
+                rnd = new Random(seed.Next());
                 gameSpace.setFigure(rnd.Next(1, 8));
                 gameSpace.unfreeze();
             }
@@ -49,6 +51,7 @@ namespace Tetris
                 else
                 {
                     gameSpace.freeze();
+                    gameSpace.check();
                     isrepeat = true;
                 }
             }
@@ -71,7 +74,9 @@ namespace Tetris
 
             if (e.KeyCode == Keys.Down && !gameSpace.isGround())
             {
+                gametimer.Stop();
                 gameSpace.moveDown();
+                gametimer.Start();
             }
             
             if (e.KeyCode == Keys.Up && gameSpace.isRotated())
@@ -82,7 +87,7 @@ namespace Tetris
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (!isbegin)
+            if (!isbegin && !gameSpace.isFreezed())
             {
                 gameSpace.buildFigure();
                 gameSpace.buildGrid();

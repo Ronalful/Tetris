@@ -52,7 +52,7 @@ namespace Tetris
         public void init ()
         {
             window.Clear(Color.Gray);
-
+            
             Pen line = new Pen(Color.Black, 1);
 
             for (int i = interval; i <= width; i += interval)
@@ -64,7 +64,7 @@ namespace Tetris
             {
                 window.DrawLine(line, 0, i, width, i);
             }
-
+            
         }
         public void unfreeze()
         {
@@ -216,6 +216,43 @@ namespace Tetris
         {
             return figure.checkRotation(grid);                
         }
+        public bool isFreezed()
+        {
+            return isfreezed;
+        }
         
+        public void check()
+        {
+            bool flag;
+            for (int j = 19;  j > 0; j--)
+            {
+                flag = true;
+                for (int i = 0; i < 10; i++)
+                {
+                    if (grid[j, i] == 0)
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (flag)
+                {
+                    delete(j);
+                    j++;
+                }
+            }
+        }
+
+        public void delete(int line)
+        {
+            for (int j = line; j > 0; j--)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    grid[j, i] = grid[j - 1, i];
+                }
+            }
+        }
     }
 }

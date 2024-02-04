@@ -58,7 +58,7 @@
             // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(358, 647);
+            this.ClientSize = new System.Drawing.Size(363, 647);
             this.Controls.Add(this.gameWindow);
             this.MaximizeBox = false;
             this.Name = "MainWindow";
