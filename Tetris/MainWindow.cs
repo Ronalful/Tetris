@@ -15,11 +15,13 @@ namespace Tetris
         bool isbegin = false;
         bool isrepeat = false;
         GameSpace gameSpace;
+        NextFigure nextF;
         Random rnd;
         public MainWindow()
         {
             InitializeComponent();
             gameSpace = new GameSpace(gameWindow.CreateGraphics(), 300);
+            nextF = new NextFigure(nextFigure.CreateGraphics(), 300);
             gameWindow.Refresh();
         }
 
@@ -28,16 +30,24 @@ namespace Tetris
             if (isbegin)
             {
                 gameSpace.init();
+                nextF.init();
                 isbegin = false;               
                 rnd = new Random();
                 gameSpace.setFigure(rnd.Next(1, 8));
+                nextF.setFigure(rnd.Next(1, 8));
+
+                nextF.clearFigure();
+                nextF.buildFigure();
+                nextF.buildGrid();
+
                 gameSpace.unfreeze();
             }
             
             if (isrepeat)
             {
                 isrepeat = false;
-                gameSpace.setFigure(rnd.Next(1, 8));
+                gameSpace.setFigure(nextF.num());
+                nextF.setFigure(rnd.Next(1, 8));
 
                 if (gameSpace.isLocked())
                 {
@@ -46,7 +56,11 @@ namespace Tetris
                     startButton.Enabled = true;
                 }
                 else
-                {                    
+                {
+                    nextF.clearFigure();
+                    nextF.buildFigure();
+                    nextF.buildGrid();
+
                     gameSpace.unfreeze();
                 }
             }
@@ -115,6 +129,7 @@ namespace Tetris
             {
                 gameSpace.buildFigure();
                 gameSpace.buildGrid();
+                
             }
         }
 

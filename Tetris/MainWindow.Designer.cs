@@ -33,7 +33,9 @@
             this.gametimer = new System.Windows.Forms.Timer(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.startButton = new System.Windows.Forms.Button();
+            this.nextFigure = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nextFigure)).BeginInit();
             this.SuspendLayout();
             // 
             // gameWindow
@@ -65,10 +67,19 @@
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click_1);
             // 
+            // nextFigure
+            // 
+            this.nextFigure.Location = new System.Drawing.Point(387, 97);
+            this.nextFigure.Name = "nextFigure";
+            this.nextFigure.Size = new System.Drawing.Size(120, 60);
+            this.nextFigure.TabIndex = 2;
+            this.nextFigure.TabStop = false;
+            // 
             // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(555, 647);
+            this.Controls.Add(this.nextFigure);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.gameWindow);
             this.MaximizeBox = false;
@@ -76,6 +87,7 @@
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nextFigure)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -86,6 +98,7 @@
         private System.Windows.Forms.Timer gametimer;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.PictureBox nextFigure;
     }
 }
 
