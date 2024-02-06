@@ -16,13 +16,16 @@ namespace Tetris
         bool isrepeat = false;
         GameSpace gameSpace;
         NextFigure nextF;
+        Counter counter;
         Random rnd;
         public MainWindow()
         {
             InitializeComponent();
             gameSpace = new GameSpace(gameWindow.CreateGraphics(), 300);
             nextF = new NextFigure(nextFigure.CreateGraphics(), 300);
+            counter = new Counter();
             gameWindow.Refresh();
+           
         }
 
         private void gametimer_Tick(object sender, EventArgs e)
@@ -31,6 +34,8 @@ namespace Tetris
             {
                 gameSpace.init();
                 nextF.init();
+                counter.reset();
+                countLabel.Text = "Score: " + Convert.ToString(counter.get());
                 isbegin = false;               
                 rnd = new Random();
                 gameSpace.setFigure(rnd.Next(1, 8));
@@ -73,7 +78,18 @@ namespace Tetris
                 else
                 {
                     gameSpace.freeze();
-                    gameSpace.check();
+                    
+                    for (int j = 19; j > 0; j--)
+                    {
+                        if (gameSpace.checkLine(j))                        
+                        {
+                            gameSpace.delete(j);
+                            counter.add(100);                            
+                            j++;
+                        }
+                    }
+
+                    countLabel.Text = "Score: " + Convert.ToString(counter.get());
                     isrepeat = true;
                 }
             }
@@ -113,6 +129,8 @@ namespace Tetris
             {
                 gametimer.Stop();
                 gameSpace.moveDown();
+                counter.add(1);
+                countLabel.Text = "Score: " + Convert.ToString(counter.get());
                 gametimer.Start();
             }
             

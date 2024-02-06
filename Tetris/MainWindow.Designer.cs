@@ -34,6 +34,7 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.startButton = new System.Windows.Forms.Button();
             this.nextFigure = new System.Windows.Forms.PictureBox();
+            this.countLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextFigure)).BeginInit();
             this.SuspendLayout();
@@ -75,10 +76,21 @@
             this.nextFigure.TabIndex = 2;
             this.nextFigure.TabStop = false;
             // 
+            // countLabel
+            // 
+            this.countLabel.AutoSize = true;
+            this.countLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.countLabel.Location = new System.Drawing.Point(332, 199);
+            this.countLabel.Name = "countLabel";
+            this.countLabel.Size = new System.Drawing.Size(134, 36);
+            this.countLabel.TabIndex = 3;
+            this.countLabel.Text = "Score: 0";
+            // 
             // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(555, 647);
+            this.Controls.Add(this.countLabel);
             this.Controls.Add(this.nextFigure);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.gameWindow);
@@ -89,6 +101,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gameWindow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextFigure)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -99,6 +112,7 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.PictureBox nextFigure;
+        private System.Windows.Forms.Label countLabel;
     }
 }
 

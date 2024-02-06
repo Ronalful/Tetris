@@ -224,27 +224,16 @@ namespace Tetris
         {
             return isfreezed;
         }        
-        public void check()
-        {
-            bool flag;
-            for (int j = 19;  j > 0; j--)
+        public bool checkLine(int j)
+        {            
+            for (int i = 0; i < 10; i++)
             {
-                flag = true;
-                for (int i = 0; i < 10; i++)
+                if (grid[j, i] == 0)
                 {
-                    if (grid[j, i] == 0)
-                    {
-                        flag = false;
-                        break;
-                    }
-                }
-
-                if (flag)
-                {
-                    delete(j);
-                    j++;
+                    return false;                   
                 }
             }
+            return true;
         }
         public void delete(int line)
         {
